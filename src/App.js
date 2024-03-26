@@ -63,6 +63,39 @@ const list = [
     fuel_consumption: 21.1,
     image: "https://kopotic.com/wp-content/uploads/2014/03/11ForRapt_01.jpg"
   },
+  {
+    name:'Chery Arrizo 8',
+    power: 186,
+    gas_tank_volume: 55,
+    max_speed: 205,
+    fuel_consumption: 6.2,
+    image: "https://cdn.motor1.com/images/mgl/1ZzmQ3/s1/chery-arrizo-8---china.jpg"
+  },
+  {
+    name:'Lada Largus',
+    power: 90,
+    gas_tank_volume: 60,
+    max_speed: 160,
+    fuel_consumption: 7.5,
+    image: "https://autocentr-khimki.ru/static/imgCar/688/2758.jpg?v=10.6"
+  },
+  {
+    name:'Smart Fortwo',
+    power: 71,
+    gas_tank_volume: 28,
+    max_speed: 151,
+    fuel_consumption: 4.1,
+    image: "https://sportishka.com/uploads/posts/2022-11/1667562335_61-sportishka-com-p-malenkii-mersedes-smart-vkontakte-64.jpg"
+  },
+  {
+    name:'УАЗ-452',
+    power: 55.2,
+    gas_tank_volume: 80,
+    max_speed: 95,
+    fuel_consumption: 13,
+    image: "https://carsweek.ru/upload/resize_cache/iblock/d67/1200_900_1/d67a50107f1cbbed232f54661cd6f5e6.jpg"
+  },
+
 ];
 
 
@@ -89,11 +122,12 @@ function MyCaruosel()
 
 function Search(){
   const[searchTerm, setSearchTerm] = useState('');
-  const[speedSearchTerm, setSpeedSearchTerm] = useState('');
+  const[minSpeedSearchTerm, setMinSpeedSearchTerm] = useState('');
+  const[maxSpeedSearchTerm, setMaxSpeedSearchTerm] = useState(10000);
   
   
   const searchCards = list.filter(function (item){
-    return item.name.includes(searchTerm) && (item.max_speed > speedSearchTerm);
+    return item.name.includes(searchTerm) && (item.max_speed > minSpeedSearchTerm) && (item.max_speed < maxSpeedSearchTerm);
   });
     
   
@@ -103,18 +137,31 @@ function Search(){
     setSearchTerm(event.target.value);
   }
   
-  const handleSpeedChange = (event) =>
+  const handleMinSpeedChange = (event) =>
   {
-    setSpeedSearchTerm(event.target.value);
+    setMinSpeedSearchTerm(event.target.value);
   }
-
+  const handleMaxSpeedChange = (event) =>
+  {
+    if (event.target.value == '')
+        setMaxSpeedSearchTerm(10000);
+    else
+        setMaxSpeedSearchTerm(event.target.value);
+  }
+  
   return(
     <div>
       <h1>Поиск</h1>
+      <div>
       <label htmlFor='search'>По имени:</label>
       <input id="search" type='text' onChange={handleChange} style={{marginTop:"40px", marginBottom:"40px"}}></input>
-      <label htmlFor='search' style={{marginLeft:"10px"}}>Скорость больше:</label>
-      <input id="search" type='text' onChange={handleSpeedChange} style={{marginTop:"40px", marginBottom:"40px"}}></input>
+      </div>
+      <div>
+      <label htmlFor='search' style={{marginLeft:"10px"}}>Мин. скорость:</label>
+      <input id="search" type='text' onChange={handleMinSpeedChange} style={{marginTop:"40px", marginBottom:"40px"}}></input>
+      <label htmlFor='search' style={{marginLeft:"10px"}}>Макс. скорость:</label>
+      <input id="search" type='text' onChange={handleMaxSpeedChange} style={{marginTop:"40px", marginBottom:"40px"}}></input>
+      </div>
       <ListCars list={searchCards}/>
     </div>
   )
@@ -126,7 +173,7 @@ const ListCars = (props) =>{
       <Row>
         {props.list.map(function(item)
         {
-          return <Col>
+          return <Col class="col-xl-3">
             <Card>
                 <div class="card rounded bg-dark">
                     <div class="card-image">
@@ -171,7 +218,8 @@ const ListCars = (props) =>{
                     <div class="card-body text-center">
                         <button type="button" class="btn btn-outline-light">Подробнее</button>                     
                     </div>
-                </div>                
+                </div>   
+
             </Card>
           </Col>
         })}
