@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import Greeting from './Greeting';
 import TextInputComponent from './TextInput';
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,7 +16,6 @@ function App(){
         <div className="App">
             <span className="left">
                 <TextInputComponent/>
-                <Greeting/>
                 <MyCaruosel/>
             </span>
             <span className="right">
@@ -102,7 +100,7 @@ const list = [
 function MyCaruosel()
 {
     return(
-        <div class="carousel" data-bs-theme="dark" variant="dark" style={{width: 600, height: 500}}>          
+        <div class="carousel" data-bs-theme="dark" variant="dark" style={{width: 600, height: 500, marginTop:200}}>          
           <Carousel>
             <Carousel.Item id="blueCarousel">
                 <img class="d-block w-100" src={pics[0]} alt="First slide"/>
