@@ -1,7 +1,9 @@
 .App {
   text-align: center;
+  justify-content: center;
   display: flex;
   padding: 20px;
+  color: white;
 }
 .right{
     margin-left: 20px;
@@ -11,19 +13,25 @@
     color: gainsboro;
 }
 
-.card-image{
-    color: white;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.myDiv{
+    width: 95vw;
 }
 
 .App-header {
@@ -34,6 +42,22 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+:root {
+  --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
+}
+
+body {
+  background: #111 !important;
+}
+
+.card {
+  background: #222;
+  border: 1px solid #dd2476;
+  background-color: rgba(250, 250, 250, 0.8);
+  margin-bottom: 2rem;
   color: white;
 }
 
