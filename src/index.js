@@ -23,14 +23,19 @@ const settings = {
 $.ajax(settings).done(function (response) {
     for(const game of response['results']){
         let curData = {};
-        curData['name'] = game['name']
-        curData['metacritic'] = game['metacritic']
-        curData['rating'] = game['rating']
-        curData['released'] = game['released']
-        curData['image'] = game['short_screenshots'][0]['image']
-        curData['playtime'] = game['playtime']
-        curData['parent_platforms'] = game['parent_platforms']
-        curData['dominant_color'] = game['dominant_color']
+        curData['name'] = game['name'];
+        curData['metacritic'] = game['metacritic'];
+        curData['rating'] = game['rating'];
+        curData['released'] = game['released'];
+        curData['image'] = game['short_screenshots'][0]['image'];
+        curData['playtime'] = game['playtime'];
+        curData['parent_platforms'] = game['parent_platforms'];
+        curData['dominant_color'] = game['dominant_color'];
+        curData['genres'] =  new Set();
+        for(const i of game['genres']){
+            curData['genres'].add(i['name']);
+        }
+        curData['genres'].add('All');
         data.push(curData)
     }
 });
